@@ -33,10 +33,10 @@ const contestStore = useContestStore()
 
 onMounted(async () => {
   await contestStore.loadContests()
-  contestStore.startWebSocketListener()
+  //contestStore.startWebSocketListener()
 })
 
 onUnmounted(() => {
-  contestStore.stopWebSocketListener()
+  //contestStore.stopWebSocketListener()
 })
 </script>

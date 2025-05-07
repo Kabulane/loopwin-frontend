@@ -1,5 +1,20 @@
 @import 'tailwindcss';
 
+@layer utilities {
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(0, 255, 128, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(0, 255, 128, 0.6);
+    }
+  }
+
+  .glow-pulse {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+}
+
 /* Ajout d'un effet de halo sur l'image si souhaité */
 .pulse-glow {
   animation: pulse-glow 2s infinite ease-in-out;

@@ -18,7 +18,9 @@ export const useUserStore = defineStore('user', () => {
 	}
 
 	function initFromApi(data) {
+    console.log("oupss")
 		user.value = new User(data)
+    console.log("User connected : {}", data)
 	}
 
   function resetUser() {

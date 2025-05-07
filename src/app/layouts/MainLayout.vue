@@ -3,8 +3,12 @@
       <Header>
         <UserMenu />
       </Header>
-  
-      <main class="flex-1 px-4 pb-10">
+
+      <div  v-if="userStore.user" class="absolute top-16 left-1/2 transform -translate-x-1/2 z-20">
+        <User-portrait :user="userStore.user" />
+      </div>
+
+      <main class="pt-24">
         <Transition name="fade" mode="out-in">
           <router-view />
         </Transition>
@@ -19,6 +23,10 @@
   <script setup>
   import Header from './Header.vue'
   import UserMenu from '../../features/user/components/UserMenu.vue'
+  import { useUserStore } from '../../features/user/store/userStore'
+  import UserPortrait from '../../features/user/components/UserPortrait.vue';
+
+  const userStore = useUserStore()
   </script>
   
   <style scoped>

@@ -8,15 +8,16 @@ export async function mockLogin(credentials) {
 
   return {
     id: 42,
+    tag: 39877,
     username: 'SharkyX',
     avatar: '/assets/avatars/cybershark.png',
-    greenLoops: 40,
+    greenLoops: 4000,
     blueLoops: 120,
     wins: 21,
     gamesPlayed: 33,
     level: 8,
     clan: 'AquaClan',
-    badges: ['championS1', 'earlyBird'],
+    badges: ['firstLoopGG'],
     recentContests: [201, 202, 203],
   }
 }

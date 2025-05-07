@@ -1,57 +1,64 @@
 <template>
-  <div class="flex items-center bg-gray-700 rounded-full px-4 py-2 shadow-inner w-max text-white">
+  <div
+    class="relative flex items-center bg-gray-800 rounded-full px-4 py-2 shadow-inner w-max text-white border border-gray-600"
+  >
     <!-- Avatar -->
     <div class="relative">
       <img
-        :src="user.avatar"
+        :src="userStore.user.avatar"
         alt="Looper Avatar"
-        class="w-16 h-16 rounded-full border-4 border-gray-800 object-cover"
+        class="w-32 h-32 rounded-full border-4 border-gray-900 object-cover"
       />
-      <div class="absolute -bottom-1 -left-1 bg-gray-200 text-gray-800 text-xs px-1 rounded shadow">
-        Lvl.{{ level }}
+      <div
+        class="absolute -bottom-1 -left-1 bg-gray-300 text-gray-900 text-md px-1 rounded shadow font-bold"
+      >
+
+        <span class="text-xs ">Lvl.</span>{{ userStore.user.level }}
       </div>
     </div>
 
     <!-- Infos -->
     <div class="ml-4 flex flex-col justify-center text-sm">
-      <div class="font-semibold leading-tight">
-        {{ username }} – <span class="text-gray-300">#{{ tag }}</span>
+      <div class="font-bold leading-tight absolute top-2 left-35">
+        {{ userStore.user.username }} – <span class="text-gray-300">#{{ userStore.user.tag }}</span>
       </div>
-      <div class="text-xs text-gray-300" v-if="title">{{ title }}</div>
+      <div class="text-xs text-gray-300" v-if="userStore.user.title">{{ userStore.user.title }}</div>
 
-      <!-- Loops -->
-      <div class="flex items-center gap-3 mt-1">
-        <div class="flex items-center gap-1 text-blue-400">
-          <span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span>
-          {{ blueLoops }} <span class="text-xs text-gray-300 ml-1">BlueLoops</span>
+      
+    <!-- Loops -->
+    <div class="flex font-bold">
+        <div>
+          <span class="inline-block w-6 h-6 align-middle mb-1 ">
+            <img src="../../../shared/assets/icons/greenLoop.png" alt="GreenLoop icon" class="w-full h-full object-contain" />
+          </span>
+          <span class="text-sm text-green-500 ">{{ userStore.user.greenLoops }} greenLoops</span>
         </div>
-        <div class="flex items-center gap-1 text-green-400">
-          <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
-          {{ greenLoops }} <span class="text-xs text-gray-300 ml-1">GreenLoops</span>
+        <div class="ml-5">
+          <span class="inline-block w-6 h-6 align-middle mb-1 ">
+            <img src="../../../shared/assets/icons/blueLoop.png" alt="BlueLoop icon" class="w-full h-full object-contain" />
+          </span>
+          <span class="text-sm text-blue-400 ">{{ userStore.user.blueLoops }} blueLoops</span>
         </div>
       </div>
 
-      <!-- Étoiles -->
-      <div class="flex mt-1">
-        <template v-for="i in 5" :key="i">
-          <svg
-            :class="i <= stars ? 'text-yellow-400' : 'text-gray-400'"
-            class="w-4 h-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path d="M10 15l-5.878 3.09 1.122-6.545L.488 6.91l6.562-.955L10 0l2.95 5.955 6.562.955-4.756 4.635 1.122 6.545z" />
-          </svg>
+      <!-- Badges -->
+      <!-- <div class="flex mt-1 space-x-1">
+        <template v-for="badge in userStore.user.badges" :key="badge">
+          <img
+            :src="`/assets/badges/${badge}.png`"
+            :alt="badge"
+            :title="badge"
+            class="w-6 h-6 rounded-sm drop-shadow"
+          />
         </template>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script setup>
-import User from '../models/User'
+import { computed } from 'vue'
+import { useUserStore } from '../store/userStore'
 
-defineProps({
-  user : User
-})
+const userStore = useUserStore()
 </script>

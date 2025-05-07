@@ -6,16 +6,13 @@
                 <img src="../../shared/assets/icons/logo.png" alt="Logo" class="h-10 w-10" />
                 <h1 class="text-xl font-bold tracking-wide "><span class="text-green-500">Loop</span><span class="text-blue-400">Win</span></h1>
             </router-link>
-            
-            <!-- TODO : Intégrer le portrait -->
-            <!-- <looper-portrait :user="user" /> -->
         </div>
     </div>
 </template>
   
   <script setup>
     import { useUserStore } from '../../features/user/store/userStore'
-    import LooperPortrait from '../../features/user/components/UserPortrait.vue'
+    import UserPortrait from '../../features/user/components/UserPortrait.vue'
 
     const userStore = useUserStore()
     async function login(credentials) {

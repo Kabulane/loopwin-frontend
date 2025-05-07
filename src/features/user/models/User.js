@@ -1,6 +1,7 @@
 export default class User {
   constructor({
     id,
+    tag,
     username,
     avatar,
     greenLoops = 0,
@@ -13,6 +14,7 @@ export default class User {
     recentContests = [],
   }) {
     this.id = id;
+    this.tag = tag;
     this.username = username;
     this.avatar = avatar;
     this.greenLoops = greenLoops;
