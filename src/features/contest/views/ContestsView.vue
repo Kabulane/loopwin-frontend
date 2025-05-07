@@ -1,78 +1,42 @@
 <template>
-    <div class="px-4 py-6 max-w-6xl mx-auto">
-      <h2 class="text-2xl font-bold text-white mb-4">🎁 Jeux concours en cours</h2>
-  
-      <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-fr h-full">
-        <ContestCard
-          v-for="contest in contests"
-          :key="contest.contestId"
-          :contest="contest"
-          @click="openModal(contest)"
-        />
-      </div>
+  <div class="px-4 py-8 text-white">
+    <h1 class="text-2xl font-bold mb-6">Concours actifs</h1>
 
-      <BaseModal 
-        @close="closeModal"
-        :show="selectedContest !== null"
-      >
-        <ContestDetail :contest="selectedContest" />
-      </BaseModal>
+    <div v-if="!contestStore.isLoading && contestStore.allContests.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 transition-opacity duration-500 opacity-100">
+      <ContestCard
+        v-for="contest in contestStore.allContests"
+        :key="contest.id"
+        :contest="contest"
+      />
     </div>
-  </template>
-  
+
+    <div v-else-if="contestStore.isLoading" class="text-gray-400">
+      Chargement des concours...
+    </div>
+
+    <div v-else class="text-gray-400">
+      Aucun concours disponible.
+    </div>
+
+    <div v-if="contestStore.error" class="mt-4 text-red-400">
+      Erreur : {{ contestStore.error }}
+    </div>
+  </div>
+</template>
+
 <script setup>
-  import { ref } from 'vue'
-  import Contest from '../models/Contest'
-  import ContestCard from '../components/ContestCard.vue'
-  import ContestDetail from '../components/ContestDetail.vue'
-  import BaseModal from '../../../shared/components/BaseModal.vue'
+import { onMounted, onUnmounted } from 'vue'
+import { useContestStore } from '@/features/contest/store/contestStore'
+import ContestCard from '@/features/contest/components/ContestCard.vue'
 
-  // Logique baseModal
-  const selectedContest = ref(null);
-  const openModal = (contest) => {
-    selectedContest.value = contest;
-  }
+const contestStore = useContestStore()
 
-  const closeModal = () => {
-    selectedContest.value = null;
-  }
-  // //
-  const contests = [
-    new Contest({
-      contestId: 1,
-      title: 'iPhone 15 Pro à gagner',
-      description: 'Tente ta chance pour un iPhone flambant neuf !',
-      image: '/assets/prizes/iphone15.png',
-      value: 1199,
-      loopsNeeded: 1200,
-      greenLoops: 1274,
-      blueLoops: 312,
-      endOfContest: new Date(Date.now() + 1000 * 60 * 60 * 3)
-    }),
-    new Contest({
-      contestId: 2,
-      title: 'PlayStation 5 édition digitale',
-      description: 'La PS5 ultime t’attend. Loops rapides, gain assuré !',
-      image: '/assets/prizes/ps5.png',
-      value: 549,
-      loopsNeeded: 550,
-      greenLoops: 478,
-      blueLoops: 96,
-      endOfContest: new Date(Date.now() + 1000 * 60 * 45)
-    }),
-    new Contest({
-      contestId: 3,
-      title: 'AirPods Pro',
-      description: 'Gagne des écouteurs Apple dernière génération !',
-      image: '/assets/prizes/airpods.png',
-      value: 279,
-      loopsNeeded: 280,
-      greenLoops: 123,
-      blueLoops: 88,
-      endOfContest: new Date(Date.now() + 1000 * 60 * 120)
-    })
-  ]
+onMounted(async () => {
+  await contestStore.loadContests()
+  contestStore.startWebSocketListener()
+})
 
-  
+onUnmounted(() => {
+  contestStore.stopWebSocketListener()
+})
 </script>
-  

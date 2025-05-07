@@ -21,6 +21,43 @@ export async function mockLogin(credentials) {
   }
 }
 
+// Exemple de mock de concours
+export const mockContests = [
+  {
+    contestId: 1,
+    title: 'iPhone 15 Pro Max',
+    description : 'Gagne ton iPhone !!!!!',
+    image: '/assets/prizes/iphone15.png',
+    value: 1399,
+    loopsNeeded: 5389,
+    greenLoops: 4335,
+    blueLoops: 5700,
+    endOfContest: '2025-05-30T23:59:59Z'
+  },
+  {
+    contestId: 2,
+    title: 'PS5 Slim Edition',
+    description : 'La plus belle de toutes les PS !',
+    image: '/assets/prizes/ps5.png',
+    value: 499,
+    loopsNeeded: 843,
+    greenLoops: 124,
+    blueLoops: 352,
+    endOfContest: '2025-05-30T23:59:59Z'
+  },
+  {
+    contestId: 3,
+    title: 'AirPods Pro 2',
+    description : 'La musique comme vous ne l\'avez jamais entendue.',
+    image: '/assets/prizes/airpods.png',
+    value: 149,
+    loopsNeeded: 367,
+    greenLoops: 97,
+    blueLoops: 112,
+    endOfContest: '2025-05-30T23:59:59Z'
+  }
+]
+
 export default {
-  mockLogin
+  mockLogin, mockContests
 }
