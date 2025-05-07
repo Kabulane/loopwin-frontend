@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+/* Ajout d'un effet de halo sur l'image si souhaité */
+.pulse-glow {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+.pulse-glow-red {
+  animation: pulse-glow-red 2s infinite ease-in-out;
+}
+
+.logo-header:hover {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  }
+}
+
+@keyframes pulse-glow-red {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(107, 7, 7, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(148, 18, 18, 0.781));
+  }
+}
