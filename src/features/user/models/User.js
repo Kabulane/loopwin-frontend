@@ -3,6 +3,7 @@ export default class User {
     id,
     tag,
     username,
+    title,
     avatar,
     greenLoops = 0,
     blueLoops = 0,
@@ -16,6 +17,7 @@ export default class User {
     this.id = id;
     this.tag = tag;
     this.username = username;
+    this.title = title
     this.avatar = avatar;
     this.greenLoops = greenLoops;
     this.blueLoops = blueLoops;
