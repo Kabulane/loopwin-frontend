@@ -1,7 +1,7 @@
 <template>
   <RouterLink
     :to="`/profile`"
-    class="mt-10"
+    class="mt-15"
   >
     <div
       class="relative flex items-center px-6 py-4 w-md mx-auto

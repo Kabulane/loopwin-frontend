@@ -1,5 +1,20 @@
 <template>
-  
+  <div class="flex flex-col md:flex-row items-start px-4 md:px-8 gap-6">
+    <!-- Espace réservé au portrait sur petits écrans -->
+    <div class="block md:hidden h-[144px] w-full shrink-0"></div>
+    <!-- Bloc de texte -->
+    <div
+      class="min-h-[144px] w-full md:w-1/2 bg-gradient-to-br from-gray-800 to-gray-900
+             rounded-xl border border-gray-700 shadow-md relative overflow-hidden p-4
+             text-slate-200 text-sm leading-relaxed"
+    >
+      <div class="absolute inset-0 pointer-events-none opacity-5 bg-[url('/assets/scanlines.svg')]"></div>
+      <p class="relative z-10">
+        🎯 Bienvenue sur <span class="text-green-400 font-semibold">LoopWin</span> ! Ici, explore les concours actifs,
+        mise tes Loops, et tente de décrocher des récompenses tech, gaming et lifestyle !
+      </p>
+    </div>
+  </div>
   <div class="px-4 py-8 text-white">
     <h1 class="text-2xl font-bold mb-6">Concours actifs</h1>
 
