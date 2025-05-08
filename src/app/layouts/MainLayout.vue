@@ -4,9 +4,11 @@
         <UserMenu />
       </Header>
 
-      <div  v-if="userStore.user" class="absolute top-16 left-1/2 transform -translate-x-1/2 z-20">
-        <User-portrait :user="userStore.user" />
-      </div>
+      <transition name="fade-slide" mode="out-in">
+        <UserPortrait :user="userStore.user" v-if="!route.path.startsWith('/profil')" class="fixed top-6 right-4 z-50" />
+      </transition>
+
+      
 
       <main class="pt-24">
         <Transition name="fade" mode="out-in">
@@ -25,6 +27,8 @@
   import UserMenu from '../../features/user/components/UserMenu.vue'
   import { useUserStore } from '../../features/user/store/userStore'
   import UserPortrait from '../../features/user/components/UserPortrait.vue';
+  import { useRoute } from 'vue-router'
+  const route = useRoute()
 
   const userStore = useUserStore()
   </script>
@@ -35,5 +39,20 @@
   }
   .fade-enter-from, .fade-leave-to {
     opacity: 0;
+  }
+
+  .fade-slide-enter-active,
+  .fade-slide-leave-active {
+    transition: all 0.4s ease;
+  }
+  .fade-slide-enter-from,
+  .fade-slide-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  .fade-slide-enter-to,
+  .fade-slide-leave-from {
+    opacity: 1;
+    transform: translateY(0);
   }
   </style>

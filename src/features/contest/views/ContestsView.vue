@@ -1,4 +1,5 @@
 <template>
+  
   <div class="px-4 py-8 text-white">
     <h1 class="text-2xl font-bold mb-6">Concours actifs</h1>
 
