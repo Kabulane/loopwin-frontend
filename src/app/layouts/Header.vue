@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-between px-4 py-2 bg-gray-900 text-white border-b border-gray-700">
+    <div class="flex items-center justify-between px-4 py-2 bg-gray-900 text-white ">
         <div class="flex items-center space-x-3">
             <slot />
             <router-link to="/" class="flex items-center  hover:text-cyan-400 transition logo-header">

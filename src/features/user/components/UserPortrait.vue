@@ -1,20 +1,19 @@
 <template>
   <RouterLink
     :to="`/profile`"
-    class="mt-15"
+    class=""
   >
     <div
-      class="relative flex items-center px-6 py-4 w-md mx-auto
+      class="relative flex items-center px-6 w-md mx-auto
           rounded-full text-white border border-gray-700
-          bg-gradient-to-br from-gray-700 via-gray-800 to-gray-700
+          bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800
           shadow-[0_0_12px_#22c55e33,0_0_24px_#3b82f633]
           transition-all duration-500 ease-in-out transform
-          hover:shadow-[0_0_25px_#22c55eaa,0_0_45px_#3b82f6aa]
+          hover:shadow-[0_0_5px_#22c55eaa,0_0_5px_#3b82f6aa]
           hover:scale-105
-          hover:bg-gradient-to-br hover:from-gray-600 hover:via-gray-700 hover:to-gray-600
+          hover:bg-gradient-to-br hover:from-gray-800 hover:via-gray-900 hover:to-gray-800
           animate-floating"
     >
-
       <!-- Avatar -->
       <div class="relative">
         <LoopCircle 
@@ -84,7 +83,7 @@
         </div>
 
         <!-- Badges -->
-        <div class="flex mt-1 mb-2 space-x-1 absolute right-5 glow-pulse">
+        <div class="flex mt-1 mb-2 space-x-1 absolute right-3 glow-pulse">
           <template v-for="badge in userStore.user.badges" :key="badge">
             <img
               :src="`/assets/badges/${badge}.png`"

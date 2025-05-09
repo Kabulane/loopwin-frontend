@@ -1,0 +1,8 @@
+{
+	"contextual": {
+		"home": "Bienvenue sur LoopWin ! Explore les concours et défie le hasard.",
+		"contests": "Bienvenue sur les concours LoopWin !\n\nChaque concours te permet de tenter ta chance pour remporter un lot exclusif en misant des Loops. Plus tu mises de Loops, plus tu augmentes tes chances… mais un seul Looper l'emportera !\n\nLes concours se déclenchent automatiquement dès qu'un certain nombre de <span class=\"text-green-500\">GreenLoops</span> (loops payants) sont misés. Tu peux aussi miser des <span class=\"text-blue-400\">BlueLoops</span> (loops gratuits) pour augmenter tes probabilités de victoire.\n\nUne fois le tirage lancé, un Loop est sélectionné au hasard. Le Looper à qui il appartient remporte le lot. \n\nTu peux miser à tout moment, en plusieurs fois, et observer en temps réel la progression du concours. Garde l’œil sur les Loops en approche du seuil !\n\n <br/><a href='/rules' class='underline text-green-400 hover:text-green-300  transition'>Consulte les règles complètes de LoopWin ici</a>.",
+		"profile": "Gère ton profil, ton GlowPod et ton style de Looper.",
+		"shop": "Recharge tes Loops pour continuer à participer aux concours."
+	}
+}
