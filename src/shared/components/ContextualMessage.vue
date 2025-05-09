@@ -4,13 +4,13 @@
     <div
       v-if="message"
       v-html="message"
-      class="text-sm sm:text-base text-center w-full mx-auto ml-5 mt-5 md:mt-0 px-4 py-2 rounded-lg
+      class="text-sm sm:text-base text-center h-full ml-5 mt-5 md:mt-0 px-4 py-2 rounded-lg
              bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 
              text-white shadow-md border border-gray-600
              animate-fade-in ring-1 ring-gray-600/30"
     ></div>
   </transition>
-  </template>
+</template>
 
   
   <script setup>

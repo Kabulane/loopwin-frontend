@@ -4,20 +4,15 @@
       <header class="w-full px-4 py-2 flex justify-between items-center bg-gray-900 shadow-md  top-0 z-50">
         <Header>
           <UserMenu />
-          
         </Header>
       </header>
       
-      <div class="flex flex-col md:flex-row p-5">
+      <div class="flex flex-col md:flex-row p-4">
         <transition name="fade-slide" mode="out-in">
-          <UserPortrait :user="userStore.user" v-if="!route.path.startsWith('/profil') && null != userStore.user" class=" md:top-3" />
+          <UserBoard :user="userStore.user" v-if="null != userStore.user" class=" md:top-3" />
         </transition>
-        <ContextualMessage />
       </div>
       
-
-      
-
       <main class="pt-2">
         <Transition name="fade" mode="out-in">
           <router-view />
@@ -34,7 +29,7 @@
   import Header from './Header.vue'
   import UserMenu from '../../features/user/components/UserMenu.vue'
   import { useUserStore } from '../../features/user/store/userStore'
-  import UserPortrait from '../../features/user/components/UserPortrait.vue';
+  import UserBoard from '../../features/user/components/UserBoard.vue';
   import { useRoute } from 'vue-router'
   import ContextualMessage from '../../shared/components/ContextualMessage.vue';
 
