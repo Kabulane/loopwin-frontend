@@ -1,14 +1,14 @@
 <template>
-  <div class="flex flex-col lg:flex-row w-full mt-15">
+  <div class="flex flex-col lg:flex-row  lg:mt-15 w-full mt-30">
     
     <!-- UserSheet : largeur fixe -->
-    <div class="w-full lg:w-[430px] shrink-0">
+    <div class="w-full lg:w-[430px] shrink-0 max-w-[430px] ">
       <UserSheet />
     </div>
 
     <!-- ContextualMessage : prend le reste -->
     <div
-      class="w-full lg:flex-1 max-h-[400px] overflow-auto" 
+      class="w-full lg:flex-1 max-h-[400px] mt-5 lg:mt-0 overflow-auto" 
     >
       <ContextualMessage />
     </div>
