@@ -3,24 +3,26 @@
 export class Contest {
   constructor({
     contestId,
+    type,
     title,
     description,
     image,
-    value,
+    price,
     loopsNeeded,
     greenLoops = 0,
     blueLoops = 0,
     endOfContest
   }) {
     this.contestId = contestId
+    this.type = type
     this.title = title
     this.description = description
     this.image = image
-    this.value = value
+    this.price = price
     this.loopsNeeded = loopsNeeded
     this.greenLoops = greenLoops
     this.blueLoops = blueLoops
-    this.endOfContest = new Date(endOfContest)
+    this.endOfContest = null != endOfContest ? new Date(endOfContest) : null
   }
 
   get totalLoops() {

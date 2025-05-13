@@ -7,7 +7,6 @@
         <h1 class="text-white text-xl font-bold leading-tight">{{ contest.title }}</h1>
         <p class="text-sm text-gray-400">{{ contest.description }}</p>
       </div>
-
       <!-- Bloc Loop -->
       <div class="flex justify-center items-center">
         <LoopCircle 
@@ -25,16 +24,16 @@
       <div class="space-y-2 text-sm text-center">
         <p class="text-gray-400">
           Concours n°{{ contest.contestId }} — Valeur : 
-          <span class="text-slate-200 font-medium">{{ contest.value }}€</span>
+          <span class="text-slate-200 font-medium">{{ contest.price }}€</span>
         </p>
 
         <p class="text-lg font-semibold text-white" v-html="contest.displayTime" />
 
-        <p class="text-gray-400">
+        <!-- <p class="text-gray-400">
           Total Loops misés : <span class="text-blue-400">{{ contest.totalLoops }}</span><br />
           Vous : <span class="text-green-400">{{ bet.totalLoops }}</span> 
           (<span class="text-green-400">{{ bet.getChancesRelativeTo(contest) }}</span> de chances)
-        </p>
+        </p> -->
       </div>
 
       <!-- Zone de mise GreenLoops -->
@@ -68,11 +67,26 @@
 </template>
   
 <script setup>
-import LoopCircle from '../../../shared/components/LoopCircle.vue'
-import { Contest } from '../models/Contest.js'
-import { Bet } from '../../currency/models/Bet.js'
-import GreenLoop from '../../currency/components/GreenLoop.vue'
-import BlueLoop from '../../currency/components/BlueLoop.vue'
+import { computed } from 'vue'
+import { useContestStore } from '@/features/contest/store/contestStore'
+import { Bet } from '@/features/currency/models/Bet'
+import GreenLoop from '@/features/currency/components/GreenLoop.vue'
+import BlueLoop from '@/features/currency/components/BlueLoop.vue'
+import LoopCircle from '@/shared/components/LoopCircle.vue'
+
+const { contestId } = defineProps({
+  contestId: Number
+})
+
+const contestStore = useContestStore()
+console.log(contestId)
+
+const contest = computed(() => {
+  return contestId
+    ? contestStore.getContestById(contestId)
+    : null
+})
+console.log("Contest :", contest);
 
 function greenBet(amount) {
   console.log(`GreenLoop misé : ${amount}`)
@@ -80,18 +94,6 @@ function greenBet(amount) {
 function blueBet(amount) {
   console.log(`BlueLoop misé : ${amount}`)
 }
-
-const contest = new Contest({
-  contestId: 1,
-  title: 'iPhone 15 Pro à gagner',
-  description: 'Participez pour tenter de remporter un iPhone 15 Pro flambant neuf !',
-  image: '/assets/prizes/iphone15.png',
-  value: 1199,
-  loopsNeeded: 1199,
-  greenLoops: 1174,
-  blueLoops: 319,
-  endOfContest: '2025-04-18T18:00:00'
-})
 
 const bet = new Bet({
   userId : 42,

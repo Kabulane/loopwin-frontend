@@ -6,13 +6,20 @@
             animate-fade-in ring-1 ring-gray-600/30"
       > -->
       <div class="">
-        <nav class="w-full flex flex-row gap-2">
-          <MenuLink to="/profile" icon="👤" label="Mon profil" />
+        <nav class="grid grid-cols-3 text-sm gap-3 whitespace-nowrap place-items-center">
+          
           <MenuLink to="/contests" icon="🏆" label="Concours" />
-          <MenuLink to="/shop" icon="💰" label="Boutique" />
-          <MenuLink to="/clan" icon="🛡️" label="Mon clan" />
+          <MenuLink to="/dualContests" icon="" label ="Duels"/>
+          <MenuLink to="/clanContests" icon="" label="Batailles de clans" />
+
+          <MenuLink to="/profile" icon="🛡️" label="Mon profil" />
+          <MenuLink to="/history" icon="" label ="Mes participations"/>
+          <MenuLink to="/messages" icon="" label ="Messages"/>
+
           <MenuLink to="/settings" icon="⚙️" label="Paramètres" />
-          <button class="mt-4 text-left text-sm text-red-400 hover:text-red-300 transition">🚪 Déconnexion</button>
+          <MenuLink to="/shop" icon="💰" label="Boutique" />
+          <MenuLink to="/Réglements" icon="" label ="Réglements"/>
+          <!-- <button class="mt-4 text-left text-sm text-red-400 hover:text-red-300 transition">🚪 Déconnexion</button> -->
         </nav>
       </div>
     <!-- </div> -->

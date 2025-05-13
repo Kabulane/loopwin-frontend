@@ -13,16 +13,16 @@
       </router-link>
     </div>
 
-    <!-- Menu à droite -->
+    
     <div class="flex items-center space-x-6">
-      <slot /> <!-- Place ici tes boutons/menu/login etc -->
+      <HeaderAuthButton />
     </div>
   </div>
 </template>
 
 <script setup>
 import { useUserStore } from '../../features/user/store/userStore'
-const userStore = useUserStore()
+import HeaderAuthButton from '../../shared/components/HeaderAuthButton.vue';
 </script>
 
 <style scoped>
