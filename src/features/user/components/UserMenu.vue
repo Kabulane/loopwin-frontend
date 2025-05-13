@@ -1,28 +1,20 @@
 <template>
-  <!-- <div
-      class="text-sm sm:text-base text-center w-full h-full ml-5 mt-5 md:mt-0 px-4 py-2 rounded-lg
-            bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 
-            text-white shadow-md border border-gray-600
-            animate-fade-in ring-1 ring-gray-600/30"
-      > -->
       <div class="">
         <nav class="grid grid-cols-3 text-sm gap-3 whitespace-nowrap place-items-center">
           
           <MenuLink to="/contests" icon="🏆" label="Concours" />
-          <MenuLink to="/dualContests" icon="" label ="Duels"/>
-          <MenuLink to="/clanContests" icon="" label="Batailles de clans" />
+          <MenuLink to="/dualContests" icon="" label ="Duels" :disabled="true" title="Bientôt disponible"/>
+          <MenuLink to="/clanContests" icon="" label="Batailles de clans" :disabled="true" title="Bientôt disponible"/> 
 
           <MenuLink to="/profile" icon="🛡️" label="Mon profil" />
           <MenuLink to="/history" icon="" label ="Mes participations"/>
-          <MenuLink to="/messages" icon="" label ="Messages"/>
+          <MenuLink to="/messages" icon="" label ="Messages" :disabled="true" title="Bientôt disponible"/>
 
-          <MenuLink to="/settings" icon="⚙️" label="Paramètres" />
+          <MenuLink to="/settings" icon="⚙️" label="Paramètres" :disabled="true" title="Bientôt disponible"/>
           <MenuLink to="/shop" icon="💰" label="Boutique" />
           <MenuLink to="/Réglements" icon="" label ="Réglements"/>
-          <!-- <button class="mt-4 text-left text-sm text-red-400 hover:text-red-300 transition">🚪 Déconnexion</button> -->
         </nav>
       </div>
-    <!-- </div> -->
 </template>
 
 <script setup>
