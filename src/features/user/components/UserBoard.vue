@@ -3,7 +3,7 @@
     
 
     <!-- UserSheet -->
-    <div class="mx-auto shrink-0 w-full max-w-[430px]">
+    <div v-if="userStore.user !== null" class="mx-auto shrink-0 w-full max-w-[430px]">
       <UserSheet />
     </div>
 
@@ -43,6 +43,8 @@
 import UserSheet from './UserSheet.vue'
 import UserMenu from './UserMenu.vue'
 import { ActivityConsole, useActivityFeed } from '@/features/activityConsole'
+import { useUserStore } from '../store/userStore'
 
+const userStore = useUserStore();
 const { events } = useActivityFeed()
 </script>

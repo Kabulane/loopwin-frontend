@@ -1,4 +1,3 @@
-// contestStore.js ou contestStore.ts
 import { defineStore } from 'pinia'
 import { reactive, ref, computed } from 'vue'
 import { fetchMockContestsByCategory } from '../api/contestService.mock.js' // temporaire
@@ -35,7 +34,6 @@ export const useContestStore = defineStore('contest', () => {
   }
 
   function getContestById(id){
-    console.log("bonjouuuuuuuuuuuuuuuuuur")
     console.log(contestsByCategory.hot.find(c => c.contestId === id))
     return (
       contestsByCategory.hot.find(c => c.contestId === id) ||

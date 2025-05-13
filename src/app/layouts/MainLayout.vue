@@ -3,13 +3,12 @@
       
       <header class="w-full px-4 py-2 flex justify-between items-center bg-gray-900 shadow-md  top-0 z-50">
         <Header>
-          <!-- <UserMenu /> -->
         </Header>
       </header>
       
       <div class="flex flex-col md:flex-row p-4">
         <transition name="fade-slide" mode="out-in">
-          <UserBoard :user="userStore.user" v-if="null != userStore.user" class=" md:top-3" />
+          <UserBoard :user="userStore.user" class=" md:top-3" />
         </transition>
       </div>
       
@@ -29,13 +28,8 @@
   
   <script setup>
   import Header from './Header.vue'
-  import UserMenu from '../../features/user/components/UserMenu.vue'
   import { useUserStore } from '../../features/user/store/userStore'
   import UserBoard from '../../features/user/components/UserBoard.vue';
-  import { useRoute } from 'vue-router'
-  import ContextualMessage from '../../shared/components/ContextualMessage.vue';
-
-  const route = useRoute()
 
   const userStore = useUserStore()
   </script>
