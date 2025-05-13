@@ -11,6 +11,7 @@
       <div class="flex justify-center items-center">
         <LoopCircle 
           :image = "contest.image"
+          :contestType = "contest.type"
           :greenProgress = "contest.greenProgress"
           :blueProgress = "contest.blueProgress"
           :mainDivClasses = "['relative', 'w-72', 'h-72']"

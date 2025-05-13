@@ -1,7 +1,7 @@
 <template>
     <div :class="mainDivClasses" class="relative overflow-visible">
       <!-- Cercle extérieur pour GreenLoops -->
-      <svg class="absolute top-0 left-0 w-full h-full" viewBox="-10 -10 120 120">
+      <svg class="absolute top-0 left-0 w-full h-full" viewBox="-10 -10 120 120" v-if="showGreenShine">
         <defs>
           <linearGradient id="shine-gradient-green" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#22c55e">
@@ -15,8 +15,8 @@
             </stop>
           </linearGradient>
         </defs>
-  
-        <circle
+        
+        <circle 
           class="text-gray-700"
           cx="50"
           cy="50"
@@ -25,7 +25,7 @@
           stroke="currentColor"
           :stroke-width="ringWidth"
         />
-        <circle
+        <circle 
           class="text-green-500 "
           cx="50"
           cy="50"
@@ -41,7 +41,7 @@
       </svg>
   
       <!-- Cercle intérieur pour BlueLoops -->
-      <svg class="absolute top-0 left-0 w-full h-full" viewBox="-10 -10 120 120">
+      <svg class="absolute top-0 left-0 w-full h-full" viewBox="-10 -10 120 120" v-if="showBlueShine">
         <defs>
           <linearGradient id="shine-gradient-blue" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#00BFFF">
@@ -55,7 +55,7 @@
             </stop>
           </linearGradient>
         </defs>
-        <circle
+        <circle 
           class="text-gray-500"
           cx="50"
           cy="50"
@@ -64,7 +64,7 @@
           stroke="currentColor"
           :stroke-width="innerRingWidth"
         />
-        <circle
+        <circle 
           class="text-blue-400"
           cx="50"
           cy="50"
@@ -88,17 +88,23 @@
   
   <script setup>
   import { computed } from 'vue'
-  
+  import { getContestTypeFlags } from '@/features/contest/utils/contestType'
+
   const props = defineProps({
     image: String,
     greenProgress: Number,
     blueProgress: Number,
     mainDivClasses: Array,
     imageClasses: Array,
+    contestType : {type: String, default: 'none'},
     ringWidth: { type: Number, default: 5 },
     innerRingWidth: { type: Number, default: 3 }
   })
   
+  const flags = getContestTypeFlags(props.contestType)
+  const showGreenShine = flags.isGreenType || flags.isNoneType || flags.isHybridType
+  const showBlueShine = flags.isBlueType || flags.isNoneType || flags.isHybridType
+
   const blueR = 50;
   const greenR = 55;
 

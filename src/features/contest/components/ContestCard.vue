@@ -7,6 +7,7 @@
     <!-- Image avec loops -->
     <LoopCircle 
       :image = "contest.image"
+      :contestType = "contest.type"
       :greenProgress = "contest.greenProgress"
       :blueProgress = "contest.blueProgress"
       :mainDivClasses = "['relative', 'w-32', 'h-32', 'shrink-0']"

@@ -14,9 +14,11 @@
       </div>
       
       <main class="pt-2">
-        <Transition name="fade" mode="out-in">
-          <router-view />
-        </Transition>
+        <router-view  v-slot="{ Component }">
+          <Transition name="fade" mode="out-in">
+            <component :is="Component"/>
+          </Transition>
+        </router-view>
       </main>
   
       <footer class="p-4 text-sm text-gray-400 text-center border-t border-gray-700">
