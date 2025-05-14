@@ -1,27 +1,20 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-//import { userApi } from '../api/userApi'
-import User from '../models/User'
-import mockApi from '../../../shared/mockApi'
-
+import userServiceMock from '../api/userService.mock.js'
+import User from '../models/User.js'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(null)
 
   async function login(credentials) {
-		// TODO : Appel mock
-    console.log("oups")
-		const data = await mockApi.mockLogin(credentials)
-    
-		initFromApi(data)
+    const data = await userServiceMock.mockLogin(credentials)
+    initFromApi(data)
     console.log('👤 User connecté :', user.value)
-	}
+  }
 
-	function initFromApi(data) {
-    console.log("oupss")
-		user.value = new User(data)
-    console.log("User connected : {}", data)
-	}
+  function initFromApi(data) {
+    user.value = data instanceof User ? data : new User(data)
+  }
 
   function resetUser() {
     user.value = null
@@ -31,8 +24,16 @@ export const useUserStore = defineStore('user', () => {
     user.value?.addGreenLoops(amount)
   }
 
+  function spendGreenLoops(amount) {
+    user.value?.spendGreenLoops(amount)
+  }
+
   function addBlueLoops(amount) {
     user.value?.addBlueLoops(amount)
+  }
+
+  function spendBlueLoops(amount) {
+    user.value?.spendBlueLoops(amount)
   }
 
   function recordGameResult(won) {
@@ -54,12 +55,14 @@ export const useUserStore = defineStore('user', () => {
     login,
     resetUser,
     addGreenLoops,
+    spendGreenLoops,
     addBlueLoops,
+    spendBlueLoops,
     recordGameResult,
     winRate,
     displayName,
   }
-}, 
+},
 {
   persist: true
 })
