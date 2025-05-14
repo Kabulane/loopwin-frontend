@@ -29,7 +29,7 @@
 			</div>
 
 		<!-- Infos -->
-		<div class="ml-4 flex flex-col justify-center text-md">
+		<div class="ml-1 p-3 flex flex-col justify-center text-md max-w-[180px]">
 				
 			<div class="flex flex-row w-full items-center">
 				<!-- Username à gauche -->
@@ -91,17 +91,21 @@
 
 			<!-- Loops -->
 			<div class="flex font-bold justify-center mt-2">
-				<div>
+				<!-- <div>
 					<span class="inline-block w-8 h-8 align-middle mb-1 ">
 						<img src="../../../shared/assets/icons/greenLoop.png" alt="GreenLoop icon" class="w-full h-full object-contain" />
 					</span>
-					<span class="text-xl text-green-500 ">{{ userStore.user.greenLoops }} </span> <!-- <span class="text-xs text-green-500 ">greenLoops</span> -->
+					<span class="text-xl text-green-500 ">{{ userStore.user.greenLoops }} </span> 
 				</div>
 				<div class="ml-3">
 					<span class="inline-block w-8 h-8 align-middle mb-1 ">
 						<img src="../../../shared/assets/icons/blueLoop.png" alt="BlueLoop icon" class="w-full h-full object-contain" />
 					</span>
-					<span class="text-xl text-blue-400 ">{{ userStore.user.blueLoops }} </span> <!-- <span class="text-xs text-blue-400 ">blueLoops</span>-->
+					<span class="text-xl text-blue-400 ">{{ userStore.user.blueLoops }} </span>
+				</div> -->
+				<div class="flex items-center gap-1 mb-2">
+					<GlowPod type="green" :amount="90000" />
+					<GlowPod type="blue" :amount="89000" />
 				</div>
 			</div>
 		</div>
@@ -111,6 +115,6 @@
 <script setup>
 import LoopCircle from '../../../shared/components/LoopCircle.vue'
 import { useUserStore } from '../store/userStore'
-
+import GlowPod from '../../glowPod/views/GlowPod.vue'
 const userStore = useUserStore()
 </script>
