@@ -1,23 +1,23 @@
 import User from '../models/User.js'
 import Wallet from '../models/Wallet.js'
 
-const mockUser = new User({
-  id: 'user-1234',
-  tag: 'LooperX',
-  username: 'corentin',
-  title: 'Glitch Master',
-  avatar: 'default-avatar.png', // à adapter selon ton système d'assets
+const user = new User({
+  id: 42,
+  tag: 39877,
+  username: 'SharkyX',
+  title: 'NewLooper',
+  avatar: '/assets/avatars/cybershark.png',
   wallet: new Wallet({
-    id: 'wallet-9876',
-    greenLoops: 42,
-    blueLoops: 73,
+    id: 'wallet-42',
+    greenLoops: 40,
+    blueLoops: 120,
   }),
-  wins: 15,
-  gamesPlayed: 32,
-  level: 5,
-  clan: 'AlphaLoop',
-  badges: ['earlyBird', 'glowChampion'],
-  recentContests: ['contest-001', 'contest-002'],
+  wins: 21,
+  gamesPlayed: 33,
+  level: 8,
+  clan: 'AquaClan',
+  badges: ['firstLoopGG'],
+  recentContests: [201, 202, 203]
 })
 
-export default mockUser
+export default user
