@@ -80,6 +80,7 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue'
+import BetService from '@/features/currency/api/BetService.js'
 
 const props = defineProps({
   amount: { type: Number, required: true },
@@ -88,24 +89,29 @@ const props = defineProps({
   disabled: { type: Boolean, default: false }
 })
 
-const emit = defineEmits(['click'])
+
+const emit = defineEmits(['confirm'])
 
 const armed = ref(false)
 const isShaking = ref(false)
 const isFlashing = ref(false)
 let unarmTimeout = null
 
-function handleClick() {
+function handleClick(event) {
+  event.stopPropagation()
+  
+
   if (props.disabled) return
 
   if (!armed.value) {
+    
     armed.value = true
     clearTimeout(unarmTimeout)
     unarmTimeout = setTimeout(() => {
       armed.value = false
     }, 3000)
   } else {
-    emit('click', props.amount)
+    emit('confirm', props.amount)
     triggerFloat()
     armed.value = false
 

@@ -14,8 +14,8 @@
           v-for="contest in contestStore.contestsByCategory.hot"
           :key="contest.contestId"
           :contest="contest"
-          @click="selectContest(contest)"
           class="cursor-pointer"
+          @click="selectContest(contest)"
         />
       </div>
     </section>
@@ -51,6 +51,7 @@
           :key="contest.contestId"
           :contest="contest"
           @click="selectContest(contest)"
+          
           class="cursor-pointer"
         />
       </div>
@@ -94,7 +95,6 @@ import ContestDetail from '@/features/contest/components/ContestDetail.vue'
 import BaseModal from '@/shared/components/BaseModal.vue'
 
 const contestStore = useContestStore()
-
 const selectedContestId = ref(null)
 
 function selectContest(contest) {

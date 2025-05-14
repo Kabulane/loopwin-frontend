@@ -87,7 +87,8 @@
     disabled: { type: Boolean, default: false }
   })
   
-  const emit = defineEmits(['click'])
+
+  const emit = defineEmits(['confirm'])
   
   const armed = ref(false)
   const isShaking = ref(false)
@@ -95,6 +96,8 @@
   let unarmTimeout = null
   
   function handleClick() {
+    event.stopPropagation()
+    
     if (props.disabled) return
   
     if (!armed.value) {
@@ -104,7 +107,7 @@
         armed.value = false
       }, 3000)
     } else {
-      emit('click', props.amount)
+      emit('confirm', props.amount)
       triggerFloat()
       armed.value = false
   

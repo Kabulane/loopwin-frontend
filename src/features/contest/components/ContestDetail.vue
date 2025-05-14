@@ -39,18 +39,18 @@
 
       <!-- Zone de mise GreenLoops -->
       <div class="flex gap-2 justify-center mt-4">
-        <GreenLoop :amount="1" @click="greenBet(1)" />
-        <GreenLoop :amount="5" @click="greenBet(5)" />
-        <GreenLoop :amount="10" @click="greenBet(10)" />
-        <GreenLoop :amount="50" @click="greenBet(50)" />
+        <GreenLoop :amount="1" @confirm="greenBet(1)" />
+        <GreenLoop :amount="5" @confirm="greenBet(5)" />
+        <GreenLoop :amount="10" @confirm="greenBet(10)" />
+        <GreenLoop :amount="50" @confirm="greenBet(50)" />
       </div>
 
       <!-- Zone de mise BlueLoops -->
       <div class="flex gap-2 justify-center mt-2">
-        <BlueLoop :amount="1" @click="blueBet(1)" />
-        <BlueLoop :amount="5" @click="blueBet(5)" />
-        <BlueLoop :amount="10" @click="blueBet(10)" />
-        <BlueLoop :amount="50" @click="blueBet(50)" />
+        <BlueLoop :amount="1" @confirm="blueBet(1)" />
+        <BlueLoop :amount="5" @confirm="blueBet(5)" />
+        <BlueLoop :amount="10" @confirm="blueBet(10)" />
+        <BlueLoop :amount="50" @confirm="blueBet(50)" />
       </div>
 
         <!-- Bloc CTA -->
@@ -80,8 +80,6 @@ const { contestId } = defineProps({
 })
 
 const contestStore = useContestStore()
-console.log(contestId)
-
 const contest = computed(() => {
   return contestId
     ? contestStore.getContestById(contestId)
