@@ -2,7 +2,7 @@
 
 export class Contest {
   constructor({
-    contestId,
+    id,
     type,
     title,
     description,
@@ -13,7 +13,7 @@ export class Contest {
     blueLoops = 0,
     endOfContest
   }) {
-    this.contestId = contestId
+    this.id = id
     this.type = type
     this.title = title
     this.description = description

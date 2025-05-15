@@ -8,11 +8,20 @@
         armed ? 'ring-4 ring-blue-400/50' : '',
         glowClass,
         borderClass,
-        disabled ? 'opacity-50 pointer-events-none' : '',
+        isDisabled ? 'opacity-50 grayscale cursor-not-allowed' : 'cursor-pointer',
         isShaking ? 'shake-hard' : '',
         isFlashing ? 'brightness-125 saturate-200' : ''
       ]"
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
+    <div
+      v-if="isDisabled && isHovered"
+      class="absolute bottom-full mb-1 text-xs bg-gray-800 text-white px-2 py-1 rounded z-30 whitespace-nowrap"
+    >
+      Pas assez de GreenLoops
+    </div>
+
       <!-- Halo tournant -->
       <div class="absolute inset-0 rounded-full border-2 border-blue-400 animate-spin-slow opacity-20"></div>
   
@@ -80,14 +89,26 @@
   
   <script setup>
   import { ref, computed, reactive } from 'vue'
-  
+  import BetService from '@/features/currency/api/BetService.mock.js'
+  import { useUserStore } from '@/features/user/store/userStore'
+
   const props = defineProps({
+    contestId: { type: Number, required: true },
     amount: { type: Number, required: true },
     size: { type: String, default: 'md' },
     disabled: { type: Boolean, default: false }
   })
   
+  const userStore = useUserStore()
 
+  const isDisabledByWallet = computed(() => {
+    const wallet = userStore.user?.wallet
+    return !wallet || wallet.blueLoops < props.amount
+  })
+
+  const isDisabled = computed(() => props.disabled || isDisabledByWallet.value)
+
+  const isHovered = ref(false)
   const emit = defineEmits(['confirm'])
   
   const armed = ref(false)
@@ -95,7 +116,7 @@
   const isFlashing = ref(false)
   let unarmTimeout = null
   
-  function handleClick() {
+  async function handleClick(event) {
     event.stopPropagation()
     
     if (props.disabled) return
@@ -107,19 +128,24 @@
         armed.value = false
       }, 3000)
     } else {
-      emit('confirm', props.amount)
-      triggerFloat()
       armed.value = false
-  
-      isShaking.value = true
-      setTimeout(() => {
-        isShaking.value = false
-      }, 400)
-  
-      isFlashing.value = true
-      setTimeout(() => {
-        isFlashing.value = false
-      }, 500)
+
+      const result = await BetService.bet(props.contestId, props.amount, 'blue')
+
+      if (result.success) {
+        emit('confirm', props.amount)
+        triggerFloat()
+
+        // Animation
+        isShaking.value = true
+        setTimeout(() => (isShaking.value = false), 400)
+
+        isFlashing.value = true
+        setTimeout(() => (isFlashing.value = false), 500)
+      } else {
+        console.warn(`[BlueLoop] Erreur de mise : ${result.error}`)
+        // 💡 Plus tard : afficher feedback UI
+      }
     }
   }
   

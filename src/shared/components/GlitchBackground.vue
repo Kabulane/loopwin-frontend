@@ -1,5 +1,5 @@
 <template>
-    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute inset-0 pointer-events-none z-40">
         <!-- Scanlines -->
         <div class="w-full h-full glitch-scan absolute" />
 

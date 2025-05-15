@@ -24,7 +24,7 @@
       <!-- Bloc infos + stats -->
       <div class="space-y-2 text-sm text-center">
         <p class="text-gray-400">
-          Concours n°{{ contest.contestId }} — Valeur : 
+          Concours n°{{ contest.id }} — Valeur : 
           <span class="text-slate-200 font-medium">{{ contest.price }}€</span>
         </p>
 
@@ -39,18 +39,18 @@
 
       <!-- Zone de mise GreenLoops -->
       <div class="flex gap-2 justify-center mt-4">
-        <GreenLoop :amount="1" @confirm="greenBet(1)" />
-        <GreenLoop :amount="5" @confirm="greenBet(5)" />
-        <GreenLoop :amount="10" @confirm="greenBet(10)" />
-        <GreenLoop :amount="50" @confirm="greenBet(50)" />
+        <GreenLoop :amount="1" :contestId="contest.id" />
+        <GreenLoop :amount="5" :contestId="contest.id" />
+        <GreenLoop :amount="10" :contestId="contest.id" />
+        <GreenLoop :amount="50" :contestId="contest.id" />
       </div>
 
       <!-- Zone de mise BlueLoops -->
       <div class="flex gap-2 justify-center mt-2">
-        <BlueLoop :amount="1" @confirm="blueBet(1)" />
-        <BlueLoop :amount="5" @confirm="blueBet(5)" />
-        <BlueLoop :amount="10" @confirm="blueBet(10)" />
-        <BlueLoop :amount="50" @confirm="blueBet(50)" />
+        <BlueLoop :amount="1" :contestId="contest.id" />
+        <BlueLoop :amount="5" :contestId="contest.id" />
+        <BlueLoop :amount="10" :contestId="contest.id" />
+        <BlueLoop :amount="50" :contestId="contest.id" />
       </div>
 
         <!-- Bloc CTA -->
@@ -70,7 +70,6 @@
 <script setup>
 import { computed } from 'vue'
 import { useContestStore } from '@/features/contest/store/contestStore'
-import { Bet } from '@/features/currency/models/Bet'
 import GreenLoop from '@/features/currency/components/GreenLoop.vue'
 import BlueLoop from '@/features/currency/components/BlueLoop.vue'
 import LoopCircle from '@/shared/components/LoopCircle.vue'
@@ -84,21 +83,6 @@ const contest = computed(() => {
   return contestId
     ? contestStore.getContestById(contestId)
     : null
-})
-console.log("Contest :", contest);
-
-function greenBet(amount) {
-  console.log(`GreenLoop misé : ${amount}`)
-}
-function blueBet(amount) {
-  console.log(`BlueLoop misé : ${amount}`)
-}
-
-const bet = new Bet({
-  userId : 42,
-  contestId : 1,
-  greenLoops : 54,
-  blueLoops : 3
 })
 </script>
   

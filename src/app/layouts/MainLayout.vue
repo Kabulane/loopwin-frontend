@@ -8,10 +8,13 @@
       
       <div class="flex flex-col md:flex-row p-4">
         <transition name="fade-slide" mode="out-in">
-          <UserBoard :user="userStore.user" class=" md:top-3" />
+          <UserBoard :user="userStore.user" class=" md:top-3" id="user-board-observe"/>
         </transition>
+        <LoopBalanceSticky v-if="userStore.user" />
       </div>
+
       
+
       <main class="pt-2">
         <router-view  v-slot="{ Component }">
           <Transition name="fade" mode="out-in">
@@ -30,6 +33,7 @@
   import Header from './Header.vue'
   import { useUserStore } from '../../features/user/store/userStore'
   import UserBoard from '../../features/user/components/UserBoard.vue';
+  import LoopBalanceSticky from '../../shared/components/LoopBalanceSticky.vue'
 
   const userStore = useUserStore()
   </script>

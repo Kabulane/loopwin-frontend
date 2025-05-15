@@ -23,7 +23,7 @@
         >
           <div
             v-for="contest in contests"
-            :key="contest.contestId"
+            :key="contest.id"
             @click="$emit('select', contest)"
             class="snap-start shrink-0 w-[90%] sm:w-[48%] md:w-[32%] lg:w-[30%] xl:w-[30%] cursor-pointer
                     rounded-xl shadow-lg hover:scale-[1.02] transition p-3"

@@ -11,7 +11,7 @@ const in3d = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000)
 export const mockContests = {
   hot: [
     new Contest({
-      contestId: 1,
+      id: 1,
       type: 'hybrid',
       title: 'PlayStation 5 Silver',
       description: 'Concours en cours, participe vite !',
@@ -23,58 +23,58 @@ export const mockContests = {
       endOfContest: in1h
     }),
     new Contest({
-      contestId: 2,
-      type: 'hybrid',
-      title: 'iPhone 15 Pro',
-      description: 'Concours explosif, timer déclenché !',
-      image: '/assets/prizes/iphone15.png',
-      price: 1200,
-      loopsNeeded: 150,
-      greenLoops: 160,
-      blueLoops: 30,
-      endOfContest: in6h
-    })
-  ],
-
-  hybrid: [
-    new Contest({
-			contestId: 1,
-			type: 'hybrid',
-			title: 'PlayStation 5 Silver',
-			description: 'Concours en cours, participe vite !',
-			image: 'assets/prizes/ps5.png',
-			price: 499,
-			loopsNeeded: 100,
-			greenLoops: 85,
-			blueLoops: 15,
-			endOfContest: in1h
-		}),
-		new Contest({
-			contestId: 3,
+			id: 2,
 			type: 'hybrid',
 			title: 'AirPods',
 			description: 'Pour un maximum de confort auditif !',
 			image: 'assets/prizes/airpods.png',
 			price: 135,
-			loopsNeeded: 350,
+			loopsNeeded: 150,
+			greenLoops: 160,
+			blueLoops: 30,
+			endOfContest: null
+		})
+  ],
+
+  hybrid: [
+    new Contest({
+      id: 1,
+      type: 'hybrid',
+      title: 'PlayStation 5 Silver',
+      description: 'Concours en cours, participe vite !',
+      image: 'assets/prizes/ps5.png',
+      price: 499,
+      loopsNeeded: 100,
+      greenLoops: 112,
+      blueLoops: 15,
+      endOfContest: in1h
+    }),
+		new Contest({
+			id: 2,
+			type: 'hybrid',
+			title: 'AirPods',
+			description: 'Pour un maximum de confort auditif !',
+			image: 'assets/prizes/airpods.png',
+			price: 135,
+			loopsNeeded: 150,
 			greenLoops: 160,
 			blueLoops: 30,
 			endOfContest: null
 		}),
 		new Contest({
-			contestId: 2,
+			id: 3,
 			type: 'hybrid',
 			title: 'iPhone 15 Pro',
 			description: 'Concours explosif, timer déclenché !',
 			image: 'assets/prizes/iphone15.png',
 			price: 1200,
-			loopsNeeded: 150,
+			loopsNeeded: 190,
 			greenLoops: 160,
 			blueLoops: 30,
 			endOfContest: in6h
 		}),
     new Contest({
-      contestId: 5,
+      id: 5,
       type: 'hybrid',
       title: 'Mini projecteur LED',
       description: 'Pour des soirées ciné LoopWin',
@@ -86,7 +86,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 6,
+      id: 6,
       type: 'hybrid',
       title: 'Enceinte Bluetooth JBL',
       description: 'Un son de qualité en Loops mixés',
@@ -98,7 +98,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 7,
+      id: 7,
       type: 'hybrid',
       title: 'Caméra de streaming HD',
       description: 'Idéal pour streamer ton talent',
@@ -110,7 +110,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 8,
+      id: 8,
       type: 'hybrid',
       title: 'Réveil connecté gaming',
       description: 'Wake up Looper !',
@@ -125,7 +125,7 @@ export const mockContests = {
 
   green: [
     new Contest({
-      contestId: 9,
+      id: 9,
       type: 'green',
       title: 'MacBook Air M2',
       description: 'Concours 100% GreenLoops',
@@ -137,7 +137,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 10,
+      id: 10,
       type: 'green',
       title: 'Écran ultra-wide 34"',
       description: 'Pour une immersion totale',
@@ -149,7 +149,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 11,
+      id: 11,
       type: 'green',
       title: 'Chaise gamer ergonomique',
       description: 'Confort + GreenLoops',
@@ -164,7 +164,7 @@ export const mockContests = {
 
   blue: [
     new Contest({
-      contestId: 12,
+      id: 12,
       type: 'blue',
       title: '🎁 Goodies LoopWin',
       description: 'BlueLoops only, tente ta chance !',
@@ -176,7 +176,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 13,
+      id: 13,
       type: 'blue',
       title: '🃏 Booster Pokémon Écarlate',
       description: 'Concours BlueLoop only',
@@ -188,7 +188,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 14,
+      id: 14,
       type: 'blue',
       title: '🍿 Carte ciné 2 places',
       description: 'BlueLoop + Popcorn 🍿',
@@ -200,7 +200,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 16,
+      id: 16,
       type: 'blue',
       title: 'Pack de chaussettes du looper',
       description: 'Oui, des chaussettes. Stylées.',
@@ -212,7 +212,7 @@ export const mockContests = {
       endOfContest: null
     }),
     new Contest({
-      contestId: 18,
+      id: 18,
       type: 'blue',
       title: '🧃 Gourde isotherme LoopWin',
       description: 'Reste frais avec tes BlueLoops',

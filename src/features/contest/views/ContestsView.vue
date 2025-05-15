@@ -12,7 +12,7 @@
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.hot"
-          :key="contest.contestId"
+          :key="contest.id"
           :contest="contest"
           class="cursor-pointer"
           @click="selectContest(contest)"
@@ -30,7 +30,7 @@
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.hybrid"
-          :key="contest.contestId"
+          :key="contest.id"
           :contest="contest"
           @click="selectContest(contest)"
           class="cursor-pointer"
@@ -48,7 +48,7 @@
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.green"
-          :key="contest.contestId"
+          :key="contest.id"
           :contest="contest"
           @click="selectContest(contest)"
           
@@ -67,7 +67,7 @@
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.blue"
-          :key="contest.contestId"
+          :key="contest.id"
           :contest="contest"
           @click="selectContest(contest)"
           class="cursor-pointer"
@@ -98,7 +98,7 @@ const contestStore = useContestStore()
 const selectedContestId = ref(null)
 
 function selectContest(contest) {
-  selectedContestId.value = contest.contestId
+  selectedContestId.value = contest.id
 }
 
 function resetSelectedContest() {

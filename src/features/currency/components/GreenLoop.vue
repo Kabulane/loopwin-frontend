@@ -1,18 +1,27 @@
 <template>
   <div
     @click="handleClick"
-    class="relative rounded-full flex items-center justify-center cursor-pointer
-          transition-all duration-200 select-none"
+    @mouseenter="isHovered = true"
+    @mouseleave="isHovered = false"
+    class="relative rounded-full flex items-center justify-center transition-all duration-200 select-none"
     :class="[
       sizeClass,
       armed ? 'ring-4 ring-green-400/50' : '',
       glowClass,
       borderClass,
-      disabled ? 'opacity-50 pointer-events-none' : '',
+      isDisabled ? 'opacity-50 grayscale cursor-not-allowed' : 'cursor-pointer',
       isShaking ? 'shake-hard' : '',
       isFlashing ? 'brightness-125 saturate-200' : ''
     ]"
   >
+    <!-- Tooltip désactivé -->
+    <div
+      v-if="isDisabled && isHovered"
+      class="absolute bottom-full mb-1 text-xs bg-gray-800 text-white px-2 py-1 rounded  whitespace-nowrap z-50"
+    >
+      Pas assez de GreenLoops
+    </div>
+
     <!-- Halo tournant -->
     <div class="absolute inset-0 rounded-full border-2 border-green-400 animate-spin-slow opacity-20"></div>
 
@@ -80,50 +89,62 @@
 
 <script setup>
 import { ref, computed, reactive } from 'vue'
-import BetService from '@/features/currency/api/BetService.js'
+import { useUserStore } from '@/features/user/store/userStore'
+import BetService from '@/features/currency/api/BetService.mock.js'
 
 const props = defineProps({
+  contestId: { type: Number, required: true },
   amount: { type: Number, required: true },
   rarity: { type: String, default: 'normal' },
   size: { type: String, default: 'md' },
   disabled: { type: Boolean, default: false }
 })
 
-
 const emit = defineEmits(['confirm'])
+const isHovered = ref(false)
+
+const userStore = useUserStore()
+
+const isDisabledByWallet = computed(() => {
+  const wallet = userStore.user?.wallet
+  return !wallet || wallet.greenLoops < props.amount
+})
+
+const isDisabled = computed(() => props.disabled || isDisabledByWallet.value)
 
 const armed = ref(false)
 const isShaking = ref(false)
 const isFlashing = ref(false)
 let unarmTimeout = null
 
-function handleClick(event) {
+async function handleClick(event) {
   event.stopPropagation()
-  
 
-  if (props.disabled) return
+  if (isDisabled.value) return
 
   if (!armed.value) {
-    
     armed.value = true
     clearTimeout(unarmTimeout)
     unarmTimeout = setTimeout(() => {
       armed.value = false
     }, 3000)
   } else {
-    emit('confirm', props.amount)
-    triggerFloat()
     armed.value = false
 
-    isShaking.value = true
-    setTimeout(() => {
-      isShaking.value = false
-    }, 400)
+    const result = await BetService.bet(props.contestId, props.amount, 'green')
 
-    isFlashing.value = true
-    setTimeout(() => {
-      isFlashing.value = false
-    }, 500)
+    if (result.success) {
+      emit('confirm', props.amount)
+      triggerFloat()
+
+      isShaking.value = true
+      setTimeout(() => (isShaking.value = false), 400)
+
+      isFlashing.value = true
+      setTimeout(() => (isFlashing.value = false), 500)
+    } else {
+      console.warn(`[GreenLoop] Erreur de mise : ${result.error}`)
+    }
   }
 }
 

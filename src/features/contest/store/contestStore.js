@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
-import { reactive, ref, computed } from 'vue'
-import { fetchMockContestsByCategory } from '../api/contestService.mock.js' // temporaire
+import { reactive, ref, computed, onMounted, onUnmounted } from 'vue'
+import { fetchMockContestsByCategory } from '../api/contestService.mock.js'
+import EventBus from '../../../app/events/EventBus.js'
 
 export const useContestStore = defineStore('contest', () => {
   const error = ref(null)
@@ -33,21 +34,59 @@ export const useContestStore = defineStore('contest', () => {
     }
   }
 
-  function getContestById(id){
-    console.log(contestsByCategory.hot.find(c => c.contestId === id))
+  function getContestById(id) {
     return (
-      contestsByCategory.hot.find(c => c.contestId === id) ||
-      contestsByCategory.hybrid.find(c => c.contestId === id) ||
-      contestsByCategory.green.find(c => c.contestId === id) ||
-      contestsByCategory.blue.find(c => c.contestId === id)
+      contestsByCategory.hot.find(c => c.id === id) ||
+      contestsByCategory.hybrid.find(c => c.id === id) ||
+      contestsByCategory.green.find(c => c.id === id) ||
+      contestsByCategory.blue.find(c => c.id === id)
     )
   }
+
+  function getAllContestRefsById(id) {
+    const results = []
+  
+    for (const category in contestsByCategory) {
+      const match = contestsByCategory[category].find(c => c.id === id)
+      if (match) results.push(match)
+    }
+  
+    return results
+  }
+
+  function handleContestUpdate({ contestId, deltaGreen, deltaBlue }) {
+    const contests = getAllContestRefsById(contestId)
+  
+    if (contests.length === 0) return
+  
+    for (const contest of contests) {
+      if (typeof deltaGreen === 'number') {
+        contest.greenLoops = (contest.greenLoops || 0) + deltaGreen
+      }
+      if (typeof deltaBlue === 'number') {
+        contest.blueLoops = (contest.blueLoops || 0) + deltaBlue
+      }
+    }
+  
+    console.log(`[ContestStore] 🎯 Mise à jour de ${contests.length} occurrences du concours ${contestId}`)
+  }
+  
+
+  function initListeners() {
+    EventBus.on('contest_update', handleContestUpdate)
+  }
+
+  onUnmounted(() => {
+    EventBus.off('contest_update', handleContestUpdate)
+  })
 
   return {
     contestsByCategory,
     loadingByCategory,
     loadContestsByCategory,
+    getAllContestRefsById,
     getContestById,
+    initListeners,
     error,
     isLoadingHot: computed(() => loadingByCategory.hot),
     isLoadingHybrid: computed(() => loadingByCategory.hybrid),

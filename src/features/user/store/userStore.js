@@ -40,6 +40,11 @@ export const useUserStore = defineStore('user', () => {
     user.value?.addGameResult(won)
   }
 
+  function hasEnoughLoops(type, amount) {
+    const current = type === 'green' ? user.value?.wallet.greenLoops : user.value?.wallet.blueLoops
+    return (typeof current === 'object' && 'value' in current ? current.value : current) >= amount
+  }
+
   const winRate = computed(() => {
     const u = user.value
     return u?.gamesPlayed > 0 ? (u.wins / u.gamesPlayed) * 100 : 0
@@ -59,6 +64,7 @@ export const useUserStore = defineStore('user', () => {
     addBlueLoops,
     spendBlueLoops,
     recordGameResult,
+    hasEnoughLoops,
     winRate,
     displayName,
   }

@@ -1,24 +1,32 @@
-import { useUserStore } from '../../user/store/userStore'
+import { useUserStore } from '@/features/user/store/userStore'
 
-class BetService {
-  static bet(contestId, amount, loopType) {
+export default class BetService {
+  static async bet(contestId, amount, loopType) {
     const store = useUserStore()
 
-    const spend = isGreen ? store.spendGreenLoops : store.spendBlueLoops
-
-    if (typeof spend !== 'function') {
-      console.warn(`[BetService] Méthode de dépense inconnue pour "${loopType}"`)
-      return
+    const isGreen = loopType === 'green'
+    const isBlue = loopType === 'blue'
+    if (!isGreen && !isBlue) {
+      console.log('[BetService] Invalid bet type')
+      return { success : false, error: 'type_invalid'}
     }
+    const spend = isGreen ? store.spendGreenLoops : store.spendBlueLoops
+    const balance = isGreen ? store.greenLoops : store.blueLoops
 
-    console.log(`🎯 Pari de ${amount} ${isGreen ? 'GreenLoop' : 'BlueLoop'} sur concours ${contestId}`)
+    if (amount <= 0) return { success: false, error: 'amount_invalid' }
+    if (balance < amount) return { success: false, error: 'not_enough_loops' }
 
-    // 💡 TODO : vérification de solde à terme ?
-    spend(amount)
-
-    // 💡 TODO : appel futur à l'API de participation
-    // return api.placeBet({ contestId, amount, loopType })
+    // TODO : Appel API et handle response ! 
+    // try {
+    //   const response = await api.placeBet({ contestId, amount, loopType })
+    //   if (response.success) {
+    //     spend(amount)
+    //     return { success: true, data: response.data }
+    //   } else {
+    //     return { success: false, error: response.error }
+    //   }
+    // } catch (err) {
+    //   return { success: false, error: 'network_error' }
+    // }
   }
 }
-
-export default BetService

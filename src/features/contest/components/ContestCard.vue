@@ -1,10 +1,10 @@
 <template>
   <div
-    class="transform hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-4 bg-gray-900 text-white rounded-xl p-4 shadow-md hover:shadow-lg hover:ring-1 hover:ring-cyan-500 transition w-full"
+    class="relative z-0 hover:z-49 transform hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-4 bg-gray-900 text-white rounded-xl p-4 shadow-md hover:shadow-lg hover:ring-1 hover:ring-cyan-500 transition w-full"
     :class="{ 'pulse-glow-red': contest.hasStarted }"
   >
     <GlitchBackground v-if="contest.hasStarted" />
-
+    
     <!-- Cercle Loop -->
     <LoopCircle 
       :image="contest.image"
@@ -43,12 +43,12 @@
     <!-- Mise directe -->
     <div class="mt-4 flex flex-col gap-3 justify-end items-center">
       <div class="flex">
-        <GreenLoop :amount="1" />
-        <GreenLoop :amount="5" />
+        <GreenLoop :amount="1" :contestId="contest.id"/>
+        <GreenLoop :amount="5" :contestId="contest.id"/>
       </div>
       <div class="flex">
-        <BlueLoop :amount="1"  />
-        <BlueLoop :amount="5"  />
+        <BlueLoop :amount="1"  :contestId="contest.id"/>
+        <BlueLoop :amount="5"  :contestId="contest.id"/>
       </div>
     </div>
   </div>
