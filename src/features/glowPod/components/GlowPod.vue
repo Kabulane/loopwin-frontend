@@ -1,9 +1,5 @@
 <template>
-    <div
-      v-if="showShockwave"
-      class="shockwave-ring"
-      :class="type === 'green' ? 'bg-green-400/10' : 'bg-blue-400/10'"
-    />
+    
     <div
       class="flex items-center gap-1 px-2 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 shadow-inner transition-all duration-300 cursor-pointer group"
       :class="[type === 'green' ? 'text-green-400' : 'text-blue-400',
@@ -13,6 +9,11 @@
       }
       ]"
     >
+    <div
+      v-if="showShockwave"
+      class="shockwave-ring"
+      :class="type === 'green' ? 'bg-green-400/10' : 'bg-blue-400/10'"
+    />
       <img
         :src="podImage"
         alt="GlowPod"

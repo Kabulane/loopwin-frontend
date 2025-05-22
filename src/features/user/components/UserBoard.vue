@@ -3,13 +3,14 @@
     
 
     <!-- UserSheet -->
-    <div v-if="userStore.user !== null" class="mx-auto shrink-0 w-full max-w-[430px]">
+    <div id="user-board-observe" v-if="userStore.user !== null" class="mx-auto shrink-0 w-full max-w-[430px]">
       <UserSheet />
     </div>
-
+    <LoopBalanceSticky v-if="userStore.user" />
+    
     <!-- MenuDisplay avec cadre -->
     <div
-      class="
+      class=" 
       mx-auto 
       w-full 
       max-w-[380px] 
@@ -28,7 +29,7 @@
     >
       <UserMenu />
     </div>
-
+    
     <!-- ActivityConsole -->
     <div
       class="mx-auto w-full  lg:flex-1 h-[189px] max-h-[189px] min-h-[189px] overflow-auto  "
@@ -44,6 +45,7 @@ import UserSheet from './UserSheet.vue'
 import UserMenu from './UserMenu.vue'
 import { ActivityConsole, useActivityFeed } from '@/features/activityConsole'
 import { useUserStore } from '../store/userStore'
+import LoopBalanceSticky from '../../../shared/components/LoopBalanceSticky.vue'
 
 const userStore = useUserStore();
 const { events } = useActivityFeed()
