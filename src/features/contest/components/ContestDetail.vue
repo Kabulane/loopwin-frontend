@@ -15,7 +15,7 @@
           :greenProgress = "contest.greenProgress"
           :blueProgress = "contest.blueProgress"
           :mainDivClasses = "['relative', 'w-72', 'h-72']"
-          :imageClasses = "['w-60', 'h-60', 'object-contain', 'pulse-glow']"
+          :imageClasses = "['w-60', 'h-60', 'object-contain', 'glow-pulse']"
           :ringWidth = "5"
           :innerRingWidth = "3"
         />

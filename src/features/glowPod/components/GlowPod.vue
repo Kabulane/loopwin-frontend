@@ -1,7 +1,17 @@
 <template>
     <div
+      v-if="showShockwave"
+      class="shockwave-ring"
+      :class="type === 'green' ? 'bg-green-400/10' : 'bg-blue-400/10'"
+    />
+    <div
       class="flex items-center gap-1 px-2 py-1 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 shadow-inner transition-all duration-300 cursor-pointer group"
-      :class="type === 'green' ? 'text-green-400' : 'text-blue-400'"
+      :class="[type === 'green' ? 'text-green-400' : 'text-blue-400',
+        {
+        'impact-glow-green': isPulsing && type === 'green',
+        'impact-glow-blue': isPulsing && type === 'blue',
+      }
+      ]"
     >
       <img
         :src="podImage"
@@ -18,11 +28,11 @@
           group-hover:-translate-y-0.5
           animate-glow-idle
           group-hover:animate-glow-hover">{{ amount }}</span>
-    </div>
+    </div> 
   </template>
   
   <script setup>
-  import { computed } from 'vue'
+  import { computed, ref, watch } from 'vue'
   
   const props = defineProps({
     type: { type: String, required: true }, // 'green' | 'blue'
@@ -33,6 +43,22 @@
     props.type === 'green'
       ? '/assets/icons/greenGlowPod.png'
       : '/assets//icons/blueGlowPod.png'
+  )
+
+  const isPulsing = ref(false)
+  const showShockwave = ref(false)
+  watch(
+    () => props.amount,
+    () => {
+      isPulsing.value = true
+      showShockwave.value = true
+      setTimeout(() => {
+        isPulsing.value = false
+      }, 600)
+      setTimeout(() => {
+        showShockwave.value = false
+      }, 400)
+    }
   )
   </script>
   

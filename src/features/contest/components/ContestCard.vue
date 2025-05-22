@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative z-0 hover:z-49 transform hover:scale-[1.01] flex flex-col sm:flex-row items-center gap-4 bg-gray-900 text-white rounded-xl p-4 shadow-md hover:shadow-lg hover:ring-1 hover:ring-cyan-500 transition w-full"
-    :class="{ 'pulse-glow-red': contest.hasStarted }"
+    :class="{ 'glow-pulse-red': contest.hasStarted }"
   >
     <GlitchBackground v-if="contest.hasStarted" />
     
@@ -12,7 +12,7 @@
       :greenProgress="contest.greenProgress"
       :blueProgress="contest.blueProgress"
       :mainDivClasses="['relative', 'w-32', 'h-32', 'shrink-0']"
-      :imageClasses="['w-24', 'h-24', 'object-contain', 'pulse-glow']"
+      :imageClasses="['w-24', 'h-24', 'object-contain', 'glow-pulse']"
       :ringWidth="5"
       :innerRingWidth="3"
     />
@@ -24,16 +24,16 @@
       <div class="flex flex-col gap-1 text-xs ">
         <div class="flex font-bold">
           <div>
-            <span class="inline-block w-6 h-6 align-middle mb-1 pulse-glow">
+            <span class="inline-block w-6 h-6 align-middle mb-1 glow-pulse">
               <img src="../../../shared/assets/icons/greenLoop.png" alt="GreenLoop icon" class="w-full h-full object-contain" />
             </span>
-            <span class="text-sm text-green-500 pulse-glow">{{ contest.greenLoops }}</span>
+            <span class="text-sm text-green-500 glow-pulse">{{ contest.greenLoops }}</span>
           </div>
           <div class="ml-5">
-            <span class="inline-block w-6 h-6 align-middle mb-1 pulse-glow">
+            <span class="inline-block w-6 h-6 align-middle mb-1 glow-pulse">
               <img src="../../../shared/assets/icons/blueLoop.png" alt="BlueLoop icon" class="w-full h-full object-contain" />
             </span>
-            <span class="text-sm text-blue-400 pulse-glow">{{ contest.blueLoops }}</span>
+            <span class="text-sm text-blue-400 glow-pulse">{{ contest.blueLoops }}</span>
           </div>
         </div>
         <p class="text-white" v-html="contest.displayTime"></p>

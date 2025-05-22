@@ -17,7 +17,7 @@
 					:greenProgress = "1"
 					:blueProgress = "1"
 					:mainDivClasses = "['relative', 'w-32', 'h-32']"
-					:imageClasses = "['rounded-full', 'w-26', 'h-26', 'object-contain', 'pulse-glow']"
+					:imageClasses = "['rounded-full', 'w-26', 'h-26', 'object-contain', 'glow-pulse']"
 					:ringWidth = "5"
 					:innerRingWidth = "3"
 				/>

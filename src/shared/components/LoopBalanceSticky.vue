@@ -18,10 +18,6 @@
 
   const visible = ref(false)
   const userStore = useUserStore()
-  
-  const greenLoops = computed(() => userStore.user?.wallet?.greenLoops ?? 0)
-  const blueLoops = computed(() => userStore.user?.wallet?.blueLoops ?? 0)
-  
   let observer = null
   
   onMounted(() => {

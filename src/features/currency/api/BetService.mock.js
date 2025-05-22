@@ -3,7 +3,6 @@ import EventBus from '@/app/events/EventBus.js'
 
 class BetService {
   static async bet(contestId, amount, loopType) {
-    console.log('yo')
     const store = useUserStore()
 
     const isGreen = loopType === 'green'

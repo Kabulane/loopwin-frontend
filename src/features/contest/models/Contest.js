@@ -56,8 +56,8 @@ export class Contest {
   // Affichage du timer ou des tokens restants
   get displayTime() {
     return this.hasStarted
-      ? `<span class="text-lg">⏱ Fin dans : <span class="pulse-glow text-red-500 font-bold">${this.timeLeft}</span></span>`
-      : `Encore <span class="pulse-glow text-green-500 font-bold">${this.loopsRemaining} GreenLoops</span> nécessaires pour activer le tirage`
+      ? `<span class="text-lg">⏱ Fin dans : <span class="glow-pulse text-red-500 font-bold">${this.timeLeft}</span></span>`
+      : `Encore <span class="glow-pulse text-green-500 font-bold">${this.loopsRemaining} GreenLoops</span> nécessaires pour activer le tirage`
   }
 
   get greenProgress() {

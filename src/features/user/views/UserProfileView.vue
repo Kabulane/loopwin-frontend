@@ -1,98 +1,62 @@
-<script setup>
-import LoopCircle from '../../../shared/components/LoopCircle.vue';
-import GlowPod from '../../currency/components/GlowPod.vue';
-
-const user = {
-  id: 'looper#042',
-  username: 'CyberShark',
-  avatar: '/assets/avatars/cybershark.png',
-  greenLoops: 240,
-  blueLoops: 75,
-  wins: 4,
-  gamesPlayed: 32,
-  level: 7,
-  clan: 'NightLoopers',
-  badges: ['first-win', 'top-10', 'early-bird'],
-  recentContests: [
-    { id: 1, title: 'Razer Kraken V3', status: 'won', loops: 15 },
-    { id: 2, title: 'Steam Gift Card', status: 'lost', loops: 5 },
-  ],
-}
-</script>
-
+<!-- src/views/ProfileView.vue -->
 <template>
-  <div class="min-h-screen px-4 py-6 text-white">
-    <!-- Header utilisateur -->
-    <section class="max-w-3xl mx-auto mb-6 text-center">
-        <LoopCircle 
-          :image = "user.avatar"
-          :greenProgress = "1"
-          :blueProgress = "1"
-          :mainDivClasses = "['relative', 'w-72', 'h-72']"
-          :imageClasses = "['rounded-full', 'w-60', 'h-60', 'object-contain', 'pulse-glow']"
-          :ringWidth = "5"
-          :innerRingWidth = "3"
-        />
-        <GlowPod type="GGP" :charge="80" />
-        <GlowPod type="BGP" :charge="45" />
-      <h1 class="mt-4 text-3xl font-bold tracking-wide text-white">{{ user.username }}</h1>
-      <p class="text-sm text-zinc-400">ID : {{ user.id }}</p>
-    </section>
+  <div class="min-h-screen text-white p-6">
+    <h1 class="text-3xl font-bold mb-6 text-center">Mon Profil</h1>
 
-    <!-- Solde de Loops -->
-    <section class="max-w-3xl mx-auto grid grid-cols-2 gap-4 mb-6">
-      <div class="bg-zinc-800 rounded-2xl p-4 shadow-lg text-center">
-        <p class="text-green-400 text-sm">GreenLoops</p>
-        <p class="text-2xl font-semibold">{{ user.greenLoops }}</p>
+    <!-- GlowPods -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="bg-green-900/20 border border-green-500 p-4 rounded-xl text-center shadow">
+        <p class="text-green-300 font-semibold">GreenLoops</p>
+        <p class="text-2xl font-bold text-green-400">{{ userStore.user.wallet.greenLoops }}</p>
       </div>
-      <div class="bg-zinc-800 rounded-2xl p-4 shadow-lg text-center">
-        <p class="text-blue-400 text-sm">BlueLoops</p>
-        <p class="text-2xl font-semibold">{{ user.blueLoops }}</p>
+      <div class="bg-blue-900/20 border border-blue-500 p-4 rounded-xl text-center shadow">
+        <p class="text-blue-300 font-semibold">BlueLoops</p>
+        <p class="text-2xl font-bold text-blue-400">{{ userStore.user.wallet.blueLoops }}</p>
       </div>
-    </section>
+    </div>
 
-    <!-- Statistiques -->
-    <section class="max-w-3xl mx-auto grid grid-cols-3 gap-4 mb-6 text-center">
-      <div class="bg-zinc-800 rounded-2xl p-4 shadow">
-        <p class="text-sm text-zinc-400">Concours joués</p>
-        <p class="text-xl font-bold text-white">{{ user.gamesPlayed }}</p>
-      </div>
-      <div class="bg-zinc-800 rounded-2xl p-4 shadow">
-        <p class="text-sm text-zinc-400">Gagnés</p>
-        <p class="text-xl font-bold text-white">{{ user.wins }}</p>
-      </div>
-      <div class="bg-zinc-800 rounded-2xl p-4 shadow">
-        <p class="text-sm text-zinc-400">Niveau</p>
-        <p class="text-xl font-bold text-white">Lv. {{ user.level }}</p>
-      </div>
-    </section>
+    <!-- Adresse postale -->
+    <div class="bg-gray-800 rounded-2xl p-6 mb-6">
+      <h3 class="text-lg font-semibold mb-2">Adresse de livraison</h3>
+      <p class="text-sm text-gray-300">
+        <span v-if="userStore.user.address">
+          {{ userStore.user.address.street }}, {{ userStore.user.address.city }}, {{ userStore.user.address.zip }}, {{ userStore.user.address.country }}
+        </span>
+        <span v-else>
+          Non renseignée
+        </span>
+      </p>
+      <button class="mt-3 px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg text-sm">Ajouter une adresse</button>
+    </div>
 
-    <!-- Historique -->
-    <section class="max-w-3xl mx-auto mb-6">
-      <h2 class="text-xl font-semibold mb-2 text-white">Derniers concours</h2>
-      <div class="space-y-2">
-        <div
-          v-for="contest in user.recentContests"
-          :key="contest.id"
-          class="flex justify-between items-center bg-zinc-800 rounded-xl p-3"
-        >
+    <!-- Participations -->
+    <div class="bg-gray-800 rounded-2xl p-6 mb-6">
+      <h3 class="text-lg font-semibold mb-4">Mes participations</h3>
+      <ul class="space-y-3">
+        <li v-for="(participation, index) in userStore.user.participations" :key="index" class="bg-gray-700/60 p-3 rounded-lg flex justify-between items-center">
           <div>
-            <p class="font-semibold">{{ contest.title }}</p>
-            <p class="text-sm text-zinc-400">{{ contest.status === 'won' ? '🏆 Gagné' : '❌ Perdu' }}</p>
+            <p class="font-medium">{{ participation.contestTitle }}</p>
+            <p class="text-sm text-gray-400">{{ participation.loopsUsed }} GreenLoops misés</p>
           </div>
-          <div class="text-right">
-            <p class="text-sm text-zinc-500">Loops misés :</p>
-            <p class="text-white font-semibold">{{ contest.loops }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Call to actions -->
-    <section class="max-w-3xl mx-auto text-center">
-      <button class="bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-6 rounded-full shadow drop-shadow-[0_0_6px_#22c55e] transition">
-        Acheter des Loops
-      </button>
-    </section>
+          <span
+            class="text-xs px-2 py-1 rounded"
+            :class="{
+              'text-yellow-400 bg-yellow-900/40': participation.status === 'active',
+              'text-green-400 bg-green-900/40': participation.status === 'won',
+              'text-red-400 bg-red-900/40': participation.status === 'lost'
+            }"
+          >
+            {{ participation.status === 'active' ? 'En cours' : participation.status === 'won' ? 'Gagné !' : 'Perdu' }}
+          </span>
+        </li>
+      </ul>
+      <button class="mt-4 text-sm text-blue-400 underline hover:text-blue-300">Voir tout l'historique</button>
+    </div>
   </div>
 </template>
+
+<script setup>
+import { useUserStore } from '../store/userStore'
+import LoopCircle from '../../../shared/components/LoopCircle.vue'
+const userStore = useUserStore()
+</script>

@@ -8,7 +8,7 @@
       <div v-if="contestStore.loadingByCategory.hot" class="text-gray-400">Chargement...</div>
       <div
         v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.hot"
@@ -26,7 +26,7 @@
       <div v-if="contestStore.loadingByCategory.hybrid" class="text-gray-400">Chargement...</div>
       <div
         v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.hybrid"
@@ -44,7 +44,7 @@
       <div v-if="contestStore.loadingByCategory.green" class="text-gray-400">Chargement...</div>
       <div
         v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.green"
@@ -63,7 +63,7 @@
       <div v-if="contestStore.loadingByCategory.blue" class="text-gray-400">Chargement...</div>
       <div
         v-else
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
       >
         <ContestCard
           v-for="contest in contestStore.contestsByCategory.blue"
