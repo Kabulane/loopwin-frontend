@@ -14,7 +14,7 @@ import LoginView from '../features/auth/views/LoginView.vue'
 import ContestsView from '../features/contest/views/ContestsView.vue'
 import ParticipationView from '../features/contest/views/ParticipationView.vue'
 //  //  User
-import UserProfileView from '../features/user/views/UserProfileView.vue'
+import UserSpaceView from '../features/user/views/UserSpaceView.vue'
 
 
 // To Delete
@@ -47,9 +47,9 @@ const routes = [
     component: ParticipationView
   },
   {
-    path: '/profile',
-    name: 'Profile',
-    component: UserProfileView
+    path: '/mySpace',
+    name: 'Mon espace',
+    component: UserSpaceView
   },
   {
     path: '/:pathMatch(.*)*',

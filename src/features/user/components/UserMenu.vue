@@ -6,7 +6,7 @@
           <MenuLink to="/dualContests" icon="" label ="Duels" :disabled="true" title="Bientôt disponible"/>
           <MenuLink v-if="userStore.user !== null" to="/clanContests" icon="" label="Batailles de clans" :disabled="true" title="Bientôt disponible"/> 
 
-          <MenuLink v-if="userStore.user !== null" to="/profile" icon="🛡️" label="Mon profil" />
+          <MenuLink v-if="userStore.user !== null" to="/mySpace" icon="🛡️" label="Mon espace" />
           <MenuLink v-if="userStore.user !== null" to="/history" icon="" label ="Mes participations"/>
           <MenuLink v-if="userStore.user !== null" to="/messages" icon="" label ="Messages" :disabled="true" title="Bientôt disponible"/>
 
